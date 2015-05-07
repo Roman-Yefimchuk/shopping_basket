@@ -26,17 +26,20 @@ angular.module('shoppingBasketApp')
                     function ($scope) {
 
                         function increaseQuantity() {
+                            // calculate quantity on increase action
                             $scope.onIncreaseQuantity({
                                 product: $scope.product
                             });
                         }
 
                         function decreaseQuantity() {
+                            // calculate quantity on decrease action
                             $scope.onDecreaseQuantity({
                                 product: $scope.product
                             });
                         }
 
+                        // export functions to scope
                         $scope.increaseQuantity = increaseQuantity;
                         $scope.decreaseQuantity = decreaseQuantity;
                     }

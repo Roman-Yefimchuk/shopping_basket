@@ -1,23 +1,7 @@
 <div class="product-item-container">
     <div class="product-item">
-        <img class="big-image"
-             ng-src="images/{{ gallery.id }}/{{ mainThumbnail }}">
 
-        <div class="gallery">
-            <div class="arrow-left"
-                 ng-click="scrollLeft()"
-                 ng-class="{ 'arrow-left-hidden' : images.length <= 3}">
-            </div>
-            <div class="thumbnails">
-                <img ng-repeat="thumbnail in visibleThumbnails"
-                     class="thumbnail" ng-src="images/{{ gallery.id }}/{{ thumbnail }}"
-                     ng-click="setMainThumbnail(thumbnail)">
-            </div>
-            <div class="arrow-right"
-                 ng-click="scrollRight()"
-                 ng-class="{ 'arrow-right-hidden' : images.length <= 3}">
-            </div>
-        </div>
+        <div gallery-carousel="gallery"></div>
 
         <div class="product-title"
              title="{{ product.title }}">
@@ -34,13 +18,13 @@
         <div class="buttons">
             <div class="quantity">
                 <div quantity-control="product"
-                     on-increase-quantity="increaseQuantity(product)"
+                     on-increase-quantity="increaseQuantity()"
                      on-decrease-quantity="decreaseQuantity()"
                      quantity="quantity"
-                     is-disabled="!product.quantity">
+                     is-disabled="!availableQuantity">
                 </div>
             </div>
-            <div class="buy-button" ng-class="{ 'disabled' : !product.quantity }"
+            <div class="buy-button" ng-class="{ 'disabled' : !availableQuantity }"
                  ng-click="addProductToBasket(product.id, quantity)">
                 <div class="product-price">
                     {{ product.price | price }}

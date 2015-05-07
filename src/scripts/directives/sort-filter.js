@@ -22,6 +22,7 @@ angular.module('shoppingBasketApp')
 
                     function ($scope) {
 
+                        // default filter modes
                         var filters = [
                             {
                                 name: '-------',
@@ -41,19 +42,24 @@ angular.module('shoppingBasketApp')
 
                             var type = $scope.sortFilter['type'];
                             if (type != 'none') {
+                                // if type not equal none update params...
                                 $location.search('sortFilterType', type);
                             } else {
+                                // ...else remove from params
                                 $location.search('sortFilterType', null);
                             }
 
+                            // notify about sort filter changing
                             $rootScope.$broadcast('sortFilter:filterChanged', type);
                         }
 
+                        // define scope properties
                         $scope.filters = filters;
                         $scope.sortFilter = _.findWhere(filters, {
                             type: $routeParams.sortFilterType || 'none'
                         });
 
+                        // export function to scope
                         $scope.changeFilter = changeFilter;
                     }
                 ]

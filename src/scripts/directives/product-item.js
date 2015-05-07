@@ -23,9 +23,9 @@ angular.module('shoppingBasketApp')
 
                     function ($scope) {
 
-                        function increaseQuantity(product) {
+                        function increaseQuantity() {
 
-                            if (getQuantity() < product.quantity) {
+                            if (getQuantity() < $scope.availableQuantity) {
                                 $scope.quantity++;
                                 return true;
                             }
@@ -76,88 +76,31 @@ angular.module('shoppingBasketApp')
                             }
                         }
 
-                        function scrollLeft() {
-
-                            var images = $scope.images;
-                            if (images.length <= 3) {
-                                return;
-                            }
-
-                            // if index equal zero - move it to tail...
-                            if ($scope.thumbnailsOffset == 0) {
-                                $scope.thumbnailsOffset = images.length - 1;
-                            } else {
-                                // ...else decrease index value
-                                $scope.thumbnailsOffset--;
-                            }
-
-                            // update thumbnails
-                            $scope.visibleThumbnails = getVisibleThumbnails();
-                        }
-
-                        function scrollRight() {
-
-                            var images = $scope.images;
-                            if (images.length <= 3) {
-                                return;
-                            }
-
-                            // if index equal images count - move it to head...
-                            if ($scope.thumbnailsOffset == images.length - 1) {
-                                $scope.thumbnailsOffset = 0;
-                            } else {
-                                // ...else increase index value
-                                $scope.thumbnailsOffset++;
-                            }
-
-                            // update thumbnails
-                            $scope.visibleThumbnails = getVisibleThumbnails();
-                        }
-
-                        function getVisibleThumbnails() {
-
-                            var images = $scope.gallery['images'];
-                            if (images.length > 3) {
-
-                                // calculate index
-                                var getIndex = function (offset) {
-                                    if ($scope.thumbnailsOffset + offset < images.length) {
-                                        return $scope.thumbnailsOffset + offset;
-                                    }
-                                    return Math.abs(images.length - ($scope.thumbnailsOffset + offset));
-                                };
-
-                                return [
-                                    images[$scope.thumbnailsOffset],
-                                    images[getIndex(1)],
-                                    images[getIndex(2)]
-                                ];
-
-                            } else {
-                                return images;
-                            }
-                        }
-
-                        function setMainThumbnail(thumbnail) {
-                            // update main thumbnail
-                            $scope.mainThumbnail = thumbnail;
-                        }
-
                         // define scope's properties
-                        $scope.images = $scope.gallery['images'];
                         $scope.quantity = 0;
-                        $scope.thumbnailsOffset = 0;
-                        $scope.mainThumbnail = $scope.images[0];
-                        $scope.visibleThumbnails = getVisibleThumbnails();
+                        $scope.availableQuantity = $scope.product['quantity'];
 
                         // export local functions to scope
                         $scope.addProductToBasket = addProductToBasket;
                         $scope.increaseQuantity = increaseQuantity;
                         $scope.decreaseQuantity = decreaseQuantity;
-                        $scope.getQuantity = getQuantity;
-                        $scope.setMainThumbnail = setMainThumbnail;
-                        $scope.scrollLeft = scrollLeft;
-                        $scope.scrollRight = scrollRight;
+
+                        $scope.$watch('selectedProducts', function (selectedProducts) {
+
+                            var selectedProduct = _.findWhere(selectedProducts, {
+                                id: $scope.product['id']
+                            });
+
+                            if (selectedProduct) {
+                                $scope.availableQuantity = $scope.product['quantity'] - selectedProduct.quantity;
+                                if ($scope.quantity > $scope.availableQuantity) {
+                                    $scope.quantity = $scope.availableQuantity;
+                                }
+                            } else {
+                                $scope.availableQuantity = $scope.product['quantity'];
+                            }
+
+                        }, true);
                     }
                 ]
             };

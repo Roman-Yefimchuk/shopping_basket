@@ -33,11 +33,13 @@ angular.module('shoppingBasketApp')
                 var filteredProducts = products;
 
                 if (currentCategoryId) {
+                    // sort products by category
                     filteredProducts = _.filter(products, function (product) {
                         return product['category_id'] == currentCategoryId;
                     });
                 }
 
+                // sort products by sort filter
                 switch (currentSortFilterType) {
                     case 'ascending_price':
                         return _.sortBy(filteredProducts, function (product) {
@@ -88,9 +90,7 @@ angular.module('shoppingBasketApp')
 
                 if (product && selectedProduct.quantity < product.quantity) {
                     selectedProduct.quantity++;
-                    return true;
                 }
-                return false;
             }
 
             function decreaseQuantity(selectedProduct) {
@@ -102,17 +102,10 @@ angular.module('shoppingBasketApp')
                 if (product) {
                     if (selectedProduct.quantity - 1 == 0) {
                         $scope.selectedProducts = _.without($scope.selectedProducts, selectedProduct);
-                        return false;
                     } else {
                         selectedProduct.quantity--;
-                        return true;
                     }
                 }
-                return false;
-            }
-
-            function getQuantity(selectedProduct) {
-                return selectedProduct.quantity;
             }
 
             $scope.categories = getMappedObject('id', categories);
@@ -123,6 +116,7 @@ angular.module('shoppingBasketApp')
 
             $scope.selectedProducts = (function () {
 
+                // restore selected products from local storage
                 var selectedProducts = $cookieStore.get('selectedProducts');
                 if (selectedProducts) {
 
@@ -142,20 +136,22 @@ angular.module('shoppingBasketApp')
 
             $scope.increaseQuantity = increaseQuantity;
             $scope.decreaseQuantity = decreaseQuantity;
-            $scope.getQuantity = getQuantity;
 
             $scope.$on('categoriesFilter:categoryChanged', function (event, categoryId) {
+                // handle category change event
                 currentCategoryId = categoryId;
                 $scope.products = getProducts();
                 $scope.productsRows = getProductsRows();
             });
 
             $scope.$on('sortFilter:filterChanged', function (event, sortFilterType) {
+                // handle sort filter change event
                 currentSortFilterType = sortFilterType;
                 $scope.products = getProducts();
                 $scope.productsRows = getProductsRows();
             });
 
+            // after changed selected products update total price and store products
             $scope.$watch('selectedProducts', function (selectedProducts) {
 
                 if (selectedProducts.length > 0) {

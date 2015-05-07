@@ -24,22 +24,26 @@ table, th, td {
     vertical-align: middle;
 }
 
-#products td {
+#products-container td {
     width: 210px;
     padding-left: 13px;
     padding-right: 13px;
 }
 
-#products td:first-child {
+#products-container td:first-child {
     width: 210px;
     padding-left: 0;
     padding-right: 13px;
 }
 
-#products td:last-child {
+#products-container td:last-child {
     width: 210px;
     padding-left: 13px;
     padding-right: 0;
+}
+
+#products-container table {
+    margin-bottom: 25px;
 }
 
 .products {
@@ -367,7 +371,6 @@ table, th, td {
     margin-top: 14px;
     margin-left: 50px;
     margin-right: 50px;
-    background-color: #00b3ee;
 }
 
 .categories-filter {

@@ -3,9 +3,8 @@
     <div class="products">
         <div categories-filter="categories"></div>
         <div sort-filter></div>
-        <div id="products">
+        <div id="products-container">
             <table cellpadding="0" cellspacing="0"
-                   style="margin-bottom: 25px;"
                    ng-repeat="productsRow in productsRows">
                 <tr>
                     <td ng-repeat="product in productsRow track by $index">
