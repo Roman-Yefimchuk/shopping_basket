@@ -1,0 +1,14 @@
+<div class="quantity-control"
+     ng-class="{ 'disabled' : isDisabled }">
+    <div class="quantity-label">
+        <span>{{ quantity }}</span>
+    </div>
+    <div class="quantity-buttons">
+        <div class="quantity-arrow-top"
+             ng-click="increaseQuantity()">
+        </div>
+        <div class="quantity-arrow-bottom"
+             ng-click="decreaseQuantity()">
+        </div>
+    </div>
+</div>

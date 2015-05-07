@@ -1,0 +1,13 @@
+<div class="categories-filter">
+
+    Please choose category:
+
+    <span ng-repeat="category in categories"
+          class="category-title"
+          ng-click="changeCategory(category)">
+
+        <span ng-class="{ 'active' : currentCategory && currentCategory.id == category.id }">
+            {{ category.title }}
+        </span>
+    </span>
+</div>

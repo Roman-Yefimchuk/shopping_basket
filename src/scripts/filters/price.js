@@ -2,6 +2,8 @@
  * Created by Roman on 5/5/2015.
  */
 
+/* basic filter for formatting price */
+
 "use strict";
 
 angular.module('shoppingBasketApp')
@@ -11,7 +13,7 @@ angular.module('shoppingBasketApp')
         function () {
 
             return function (amount) {
-                return '$ ' + (amount || 0);
+                return '$ ' + (amount || 0).toFixed(2);
             };
         }
     ]);

@@ -17,10 +17,13 @@ angular
 
         function ($routeProvider) {
 
+            // config application's routs
+
             $routeProvider
                 .when('/', {
                     templateUrl: 'src/views/controllers/shopping-basket-view.html',
                     controller: 'ShoppingBasketController',
+                    reloadOnSearch: false,
                     resolve: {
                         categories: [
 

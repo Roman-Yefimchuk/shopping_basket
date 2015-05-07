@@ -1,0 +1,11 @@
+<div class="sort-filter">
+
+    <label>
+        Sort by
+        <select ng-model="sortFilter"
+                ng-options="filter.name for filter in filters"
+                ng-change="changeFilter()">
+        </select>
+    </label>
+
+</div>

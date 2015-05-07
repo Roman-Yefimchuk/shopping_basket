@@ -12,6 +12,8 @@ angular.module('shoppingBasketApp')
         '$location',
 
         function ($scope, $location) {
+
+            // export url to scope
             $scope.requestUrl = $location.path();
         }
     ]

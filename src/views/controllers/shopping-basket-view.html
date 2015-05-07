@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="content">
 
-</body>
-</html>
+    <div class="products">
+        <div categories-filter="categories"></div>
+        <div sort-filter></div>
+        <div id="products">
+            <table cellpadding="0" cellspacing="0"
+                   style="margin-bottom: 25px;"
+                   ng-repeat="productsRow in productsRows">
+                <tr>
+                    <td ng-repeat="product in productsRow track by $index">
+                        <div ng-if="product">
+                            <div product-item="product"
+                                 selected-products="selectedProducts"
+                                 category="categories[product['category_id']]"
+                                 gallery="galleries[product['gallery_id']]">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="basket">
+        <div class="basket-header">
+            <div class="title">
+                Shopping basket
+            </div>
+            <div class="quantity">
+                <div class="ellipse-img">
+                    {{ selectedProducts.length }}
+                </div>
+                <div class="basket-img"></div>
+            </div>
+        </div>
+        <div ng-repeat="selectedProduct in selectedProducts">
+            <div class="divider"></div>
+            <div class="selected-product">
+                <div class="product-title" title="{{ selectedProduct.title }}">
+                    {{ selectedProduct.title }}
+                </div>
+                <div class="product-quantity"
+                     quantity-control="selectedProduct"
+                     on-increase-quantity="increaseQuantity(product)"
+                     on-decrease-quantity="decreaseQuantity(product)"
+                     quantity="selectedProduct.quantity">
+                </div>
+                <div class="product-price">
+                    {{ selectedProduct.price | price }}
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="basket-footer">
+            <div class="basket-total-price">
+                {{ totalPrice | price }}
+            </div>
+        </div>
+    </div>
+
+</div>
