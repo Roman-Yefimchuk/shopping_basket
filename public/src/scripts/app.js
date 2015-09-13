@@ -21,7 +21,7 @@ angular
 
             $routeProvider
                 .when('/', {
-                    templateUrl: 'src/views/controllers/shopping-basket-view.html',
+                    templateUrl: '/public/src/views/controllers/shopping-basket-view.html',
                     controller: 'ShoppingBasketController',
                     reloadOnSearch: false,
                     resolve: {
@@ -52,7 +52,7 @@ angular
                     }
                 })
                 .otherwise({
-                    templateUrl: 'src/views/controllers/page-not-found-view.html',
+                    templateUrl: '/public/src/views/controllers/page-not-found-view.html',
                     controller: 'NotFoundController'
                 });
         }

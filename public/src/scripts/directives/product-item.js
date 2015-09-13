@@ -10,7 +10,7 @@ angular.module('shoppingBasketApp')
 
         function () {
             return {
-                templateUrl: 'src/views/directives/product-item-view.html',
+                templateUrl: '/public/src/views/directives/product-item-view.html',
                 scope: {
                     selectedProducts: '=',
                     category: '=',

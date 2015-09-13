@@ -1,5 +1,5 @@
 <img class="big-image"
-     ng-src="images/{{ gallery.id }}/{{ mainThumbnail }}">
+     ng-src="public/images/{{ gallery.id }}/{{ mainThumbnail }}">
 
 <div class="gallery">
     <div class="arrow-left"
@@ -8,7 +8,7 @@
     </div>
     <div class="thumbnails">
         <img ng-repeat="thumbnail in visibleThumbnails"
-             class="thumbnail" ng-src="images/{{ gallery.id }}/{{ thumbnail }}"
+             class="thumbnail" ng-src="public/images/{{ gallery.id }}/{{ thumbnail }}"
              ng-click="setMainThumbnail(thumbnail)">
     </div>
     <div class="arrow-right"

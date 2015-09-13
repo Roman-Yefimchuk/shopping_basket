@@ -10,7 +10,7 @@ angular.module('shoppingBasketApp')
 
         function () {
             return {
-                templateUrl: 'src/views/directives/gallery-carousel-view.html',
+                templateUrl: '/public/src/views/directives/gallery-carousel-view.html',
                 scope: {
                     gallery: '=galleryCarousel'
                 },

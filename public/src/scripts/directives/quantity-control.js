@@ -11,7 +11,7 @@ angular.module('shoppingBasketApp')
         function () {
             return {
                 replace: true,
-                templateUrl: 'src/views/directives/quantity-control-view.html',
+                templateUrl: '/public/src/views/directives/quantity-control-view.html',
                 scope: {
                     isDisabled: '=',
                     product: '=quantityControl',

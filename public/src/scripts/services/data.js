@@ -19,9 +19,9 @@ angular.module('shoppingBasketApp')
             // generic function for obtaining json
             function getJson(name) {
                 return $q(function (resolve, reject) {
-                    $http.get(apiServiceBaseUri + '/data/' + name + '.json')
-                        .success(function (data) {
-                            resolve(data[name]);
+                    $http.get(apiServiceBaseUri + '/' + name)
+                        .success(function (response) {
+                            resolve(response.data[name]);
                         })
                         .error(function (error) {
                             reject(error);

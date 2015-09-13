@@ -14,7 +14,7 @@ angular.module('shoppingBasketApp')
 
         function ($routeParams, $location, $rootScope) {
             return {
-                templateUrl: 'src/views/directives/categories-filter-view.html',
+                templateUrl: '/public/src/views/directives/categories-filter-view.html',
                 scope: {
                     categories: '=categoriesFilter'
                 },

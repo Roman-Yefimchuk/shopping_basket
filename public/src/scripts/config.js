@@ -6,4 +6,4 @@
 
 angular.module('shoppingBasketApp')
 
-    .constant('apiServiceBaseUri', 'http://localhost/ShoppingBasket');
+    .constant('apiServiceBaseUri', location.origin);
