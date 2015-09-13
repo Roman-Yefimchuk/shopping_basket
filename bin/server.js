@@ -2,8 +2,21 @@
 
 (function (require) {
 
-    var port = 8080;
-    var app = require('./app')(port);
+    var mode = (function () {
+        var args = process['argv'];
+        if (args.length > 3) {
+            if (args[2] == '-mode' && args[3]) {
+                var mode = args[3].toLowerCase();
+                console.log('Server started in ' + mode.toUpperCase() + ' mode');
+                return mode;
+            }
+        }
+        console.log('Server started in STANDARD mode');
+        return 'standard';
+    })();
+
+    var config = require('./../config.json');
+    var app = require('./app')(config[mode]);
     var server = require('http').Server(app);
 
     var getErrorHandler = function (port) {
@@ -45,6 +58,8 @@
             console.info('Listening on ' + bind);
         };
     };
+
+    var port = config[mode].port;
 
     server.listen(port);
     server.on('error', getErrorHandler(port));

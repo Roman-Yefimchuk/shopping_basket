@@ -65,7 +65,7 @@
         } while (files.length > 0);
     }
 
-    function getApp(port) {
+    function getApp(config) {
 
         var app = express();
 
@@ -89,7 +89,11 @@
                 next();
             });
         });
-        app.use(logger('dev'));
+
+        if (config.debug) {
+            app.use(logger('dev'));
+        }
+
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({
             extended: false
@@ -166,13 +170,13 @@
 
         app.set('views', path.join(__dirname, '../views'));
         app.set('view engine', 'ejs');
-        app.set('port', port);
+        app.set('port', config.port);
 
         return app;
     }
 
-    module.exports = function (port) {
-        return getApp(port);
+    module.exports = function (config) {
+        return getApp(config);
     };
 
 })(require, module);
